@@ -71,11 +71,18 @@ class AISpeaker:
         
         # Play Mp3
         self.play_sound(file_name=file_name)
+        
+        # voide.mp3 파일 삭제
+        self.remove_mp3(file_name=file_name)
             
     def play_sound(self,file_name:str):
         """ MP3 Play """
         playsound(file_name)    
     
+    def remove_mp3(self,file_name:str):
+        if os.path.exists(file_name):
+            os.remove(file_name)
+        
 def main()-> None:
     # Create AISpeaker Instance
     ai_speaker : AISpeaker = AISpeaker()
