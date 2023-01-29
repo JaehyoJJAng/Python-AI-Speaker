@@ -5,13 +5,16 @@ from playsound import playsound
 
 
 def set_text()-> str:
-    return 'Can I Help You?'
+    # 영어문장
+    # return 'Can I Help You?'
+    # 한글문장
+    return '파이썬을 배우면 이런 것도 할 수 있어요'
 
 def set_file()-> str:
     return 'sample.mp3'
 
 def set_gTTS(text:str,file_name:str)-> None:
-    tts_en : gTTS = gTTS(text=text,lang='en')
+    tts_en : gTTS = gTTS(text=text,lang='ko')
     tts_en.save(savefile=file_name) 
 
 def run_mp3(file_name:str):
