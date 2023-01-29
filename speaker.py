@@ -19,16 +19,21 @@ class AISpeaker:
         self.speak(text='무엇을 도와드릴까요?')
                 
         # 더 이상 듣지 않음
-        stop_listening(wait_for_stop=False)
+        # stop_listening(wait_for_stop=False)
         
         # 프로그램 무한 반복
         while True:
-            time.sleep(0.1)
-            
+            time.sleep(0.1)            
         
     def listen(self,recognizer,audio)-> None:
         """ 음성인식 (STT) """
-        pass
+        try:
+            text = recognizer.recognize_google(audio,language='ko')
+            print(f'[User] : {text}')
+        except sr.UnknownValueError:
+            print('인식 실패')   # 음성 인식 실패한 경우
+        except sr.RequestError as rq_err: # # API Key 오류 또는 네트워크 단절 등 ..   
+            print(f'요청 실패 : {rq_err}')
     
     def answer(self,input_text:str)-> None: 
         """ 대답 """
