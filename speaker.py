@@ -1,10 +1,16 @@
 from gtts import gTTS
 from playsound import playsound
+from module.kakao_api import KakaoAPI
+from typing import List
+import random
 import speech_recognition as sr
 import time
 import os
 
-class AISpeaker:    
+class AISpeaker:
+    def __init__(self) -> None:
+        self.random_keyword : List[str] = ['고윤정','채수빈','윈터']
+        
     def run(self)-> None:
         # Create Recognizer Instance
         r : sr.Recognizer = sr.Recognizer()
@@ -46,6 +52,11 @@ class AISpeaker:
             answer_text = '오늘의 서울 기온은 추울 것 같아요!'
         elif '고마워' in input_text:
             answer_text = '별 말씀을요!'
+        elif '크롤링 해줘' in input_text:
+            answer_text = '설정된 키워드 중 무작위로 AI가 선정해 이미지를 다운로드 하겠습니다'            
+            ai_choice : str = random.choice(self.random_keyword)            
+            kakao_api : KakaoAPI = KakaoAPI(query=ai_choice)
+            kakao_api.main()
         elif '종료' in input_text:
             # 더 이상 듣지 않음
             answer_text = '다음에 또 만나요'
